@@ -1,0 +1,4 @@
+ap_parser:
+    resource: "@APParserBundle/Resources/config/routing.yml"
+    prefix:   /
+
