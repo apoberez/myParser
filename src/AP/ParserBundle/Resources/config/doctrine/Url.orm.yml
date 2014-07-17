@@ -1,0 +1,20 @@
+AP\ParserBundle\Entity\Url:
+    type: entity
+    table: null
+    repositoryClass: AP\ParserBundle\Entity\UrlRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: '30'
+        url:
+            type: string
+            length: '70'
+        active:
+            type: boolean
+    lifecycleCallbacks: {  }
