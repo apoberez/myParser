@@ -2,7 +2,7 @@
 
 namespace AP\ParserBundle\Entity;
 
-use AP\ParserBundle\SiteParsers\AbstractLinkParser;
+use AP\ParserBundle\Parsers\AbstractLinkParser;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -15,9 +15,14 @@ class UrlRepository extends EntityRepository
      */
     private $linkParser;
 
-    function __construct(AbstractLinkParser $linkParser)
+    /**
+     * @param AbstractLinkParser $linkParser
+     * @return $this
+     */
+    public function setLinkParser(AbstractLinkParser $linkParser)
     {
         $this->linkParser = $linkParser;
+        return $this;
     }
 
     function saveUrls()
@@ -33,7 +38,7 @@ class UrlRepository extends EntityRepository
     }
 
     /**
-     * @return \AP\ParserBundle\SiteParsers\AbstractLinkParser
+     * @return \AP\ParserBundle\Parsers\AbstractLinkParser
      */
     public function getLinkParser()
     {
