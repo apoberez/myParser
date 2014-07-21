@@ -8,41 +8,36 @@
 
 namespace AP\ParserBundle\Parsers\Link;
 
-
-use AP\ParserBundle\Parsers\XMLHelper\XMLHelper;
-
 class HotlineLinkParser extends AbstractLinkParser
 {
-    /**
-     * @var \AP\ParserBundle\Parsers\XMLHelper\XMLHelper
-     */
-    private $xmlHelper;
 
-    function __construct()
-    {
-        $this->xmlHelper = new XMLHelper();
-    }
-
-    /**
-     * @return \AP\ParserBundle\Parsers\XMLHelper\XMLHelper
-     */
-    public function getXmlHelper()
-    {
-        return $this->xmlHelper;
-    }
-
-    /**
-     * @return array
-     */
     public function getUrls()
     {
+        $res = array();
+        foreach($this->getPager()->childNodes as $page){
+            array_push($res, $page->nodeValue);
+        }
+        return $res;
     }
 
-    public function getCategoryProducts($categoryUrl)
+    public function getCategoryProducts()
     {
-        $document = $this->getXmlHelper()
-            ->setUrl($categoryUrl)
-            ->getDomDocument();
+
+        return ;
     }
+
+    /**
+     * @return \DOMNode
+     */
+    private function getPager()
+    {
+        $pager = $this->getXmlHelper()
+            ->setUrl($this->getCategoryUrl())
+            ->getFinder()->query('//*[contains(concat(" ", normalize-space(@class), " "), " pager ")]')->item(1);
+        return $pager;
+    }
+
+    private function getCategoryPages(){}
+
 
 } 

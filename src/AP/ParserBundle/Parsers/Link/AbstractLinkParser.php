@@ -10,14 +10,49 @@ namespace AP\ParserBundle\Parsers\Link;
 
 
 use AP\ParserBundle\Parsers\XMLHelper\XMLHelper;
-use AP\ParserBundle\Parsers\XMLHelper\XMLHelperInterface;
 
 abstract class AbstractLinkParser
 {
     /**
-     * @return \AP\ParserBundle\Parsers\XMLHelper\XMLHelperInterface
+     * @var string
      */
-    abstract public function getXmlHelper();
+    private $categoryUrl;
+
+    /**
+     * @var \AP\ParserBundle\Parsers\XMLHelper\XMLHelperInterface
+     */
+    private $xmlHelper;
+
+    function __construct($categoryUrl = null)
+    {
+        $this->categoryUrl = $categoryUrl;
+        $this->xmlHelper = new XMLHelper();
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategoryUrl()
+    {
+        return $this->categoryUrl;
+    }
+
+    /**
+     * @param string $categoryUrl
+     */
+    public function setCategoryUrl($categoryUrl)
+    {
+        $this->categoryUrl = $categoryUrl;
+    }
+
+
+    /**
+     * @return \AP\ParserBundle\Parsers\XMLHelper\XMLHelper
+     */
+    public function getXmlHelper()
+    {
+        return $this->xmlHelper;
+    }
 
     /**
      * @return array
