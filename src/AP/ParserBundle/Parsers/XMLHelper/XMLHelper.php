@@ -22,16 +22,22 @@ class XMLHelper implements XMLHelperInterface
     private function getPageContent(){
         if(!$this->getUrl()){
             throw new FileException('url needed');
-        }//todo check charset
+        }
         $content = file_get_contents($this->getUrl());
-        $charset = mb_detect_encoding($this->getUrl());
-        var_dump($charset);
-        $content = mb_convert_encoding($content, 'utf-8', 'windows-1251');
+        $charset = $this->getCharset($this->getUrl());
+        $content = mb_convert_encoding($content, 'utf-8', $charset);
         $tidy = new \tidy();
         $tidy->parseString($content, array(), 'utf8');
         $tidy->cleanRepair();
         $content = '<meta http-equiv="content-type" content="text/html; charset="utf-8">' . $tidy->body()->value;
         return $content;
+    }
+
+    private function getCharset($url){
+        $headers = get_headers($url);
+        $charset = current(preg_grep("/.*.(charset=).*/", $headers));
+        $charset = explode('=', $charset)[1];
+        return $charset;
     }
 
     /**
