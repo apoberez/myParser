@@ -57,5 +57,5 @@ abstract class AbstractLinkParser
     /**
      * @return array
      */
-    abstract public function getUrls();
+//    abstract public function getUrls();
 } 

@@ -19,8 +19,9 @@ class XMLHelper implements XMLHelperInterface
      * @return string
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
      */
-    private function getPageContent(){
-        if(!$this->getUrl()){
+    private function getPageContent()
+    {
+        if (!$this->getUrl()) {
             throw new FileException('url needed');
         }
         $content = file_get_contents($this->getUrl());
@@ -33,7 +34,8 @@ class XMLHelper implements XMLHelperInterface
         return $content;
     }
 
-    private function getCharset($url){
+    private function getCharset($url)
+    {
         $headers = get_headers($url);
         $charset = current(preg_grep("/.*.(charset=).*/", $headers));
         $charset = explode('=', $charset)[1];
@@ -62,16 +64,18 @@ class XMLHelper implements XMLHelperInterface
     /**
      * @return \DOMDocument
      */
-    public function getDomDocument(){
+    public function getDomDocument()
+    {
         $content = $this->getPageContent();
-        libxml_use_internal_errors(true);//todo enable
+        libxml_use_internal_errors(true); //todo enable
         $document = new \DOMDocument();
         $document->loadHTML($content);
         $document->preserveWhiteSpace = false;
         return $document;
     }
 
-    public function getFinder(){
+    public function getFinder()
+    {
         return new \DOMXPath($this->getDomDocument());
     }
 } 

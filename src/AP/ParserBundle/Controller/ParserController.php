@@ -20,10 +20,10 @@ class ParserController extends Controller
     public function indexAction()
     {
         $parser = new HotlineLinkParser('http://hotline.ua/computer/planshety/');
-        $k = $parser->getUrls();
+        $k = $parser->getCategoryProducts();
+        var_dump($k);
         return $this->render('@APParser/Parser/index.html.twig', array(
 //            'ss' =>$parser->getUrls()
         ));
     }
-
 }
