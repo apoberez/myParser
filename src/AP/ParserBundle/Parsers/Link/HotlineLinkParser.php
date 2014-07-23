@@ -19,7 +19,7 @@ class HotlineLinkParser extends AbstractLinkParser
         $pages = $this->getCategoryPages();
         foreach($pages as $page) {
             $pageProducts = $this->getPageProducts($page);
-            array_merge( $products, $pageProducts);
+            $products = array_merge($products, $pageProducts);
         }
         return $products;
     }
@@ -66,9 +66,9 @@ class HotlineLinkParser extends AbstractLinkParser
     {
         $pages = array($this->getCategoryUrl());
         $pagesAmount = $this->getLastPage();
-        for ($i = 1; $i <= $pagesAmount; $i++) {
+        for ($i = 1; $i < $pagesAmount; $i++) {
             $url = $this->getCategoryUrl() . "?p=$i";
-            array_push($pages, $url);
+            $pages[] = $url;
         }
         return $pages;
     }
