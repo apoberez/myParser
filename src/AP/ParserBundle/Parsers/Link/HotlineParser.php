@@ -8,16 +8,39 @@
 
 namespace AP\ParserBundle\Parsers\Link;
 
-class HotlineLinkParser extends AbstractLinkParser
+class HotlineParser extends AbstractParser
 {
+    private function getProduct($url)
+    {
+        $query = '//*[@id="full-props-list"][1]/tr';
+        $propList = $this->getXmlHelper()->getNodeList($url, $query);
+        $len = $propList->length;
+        $product = array();
+        for ($i = 0; $i < $len; $i++) {
+            $property = $propList->item($i)->childNodes;
+            if ($property->length > 2) {
+                $label = $this->prepareString($property->item(0)->textContent);
+                $value = $this->prepareString($property->item(2)->textContent);
+                $product[$label] = $value;
+            }
+        }
+        return $product;
+    }
+
+    public function getProducts()
+    {
+        $result = array($this->getProduct('http://hotline.ua/computer-planshety/asus-transformer-pad-tf300t-a1-16gb/'));
+        return $result;
+    }
+
     /**
      * @return array
      */
-    public function getCategoryProducts()
+    public function getProductsList()
     {
         $products = array();
         $pages = $this->getCategoryPages();
-        foreach($pages as $page) {
+        foreach ($pages as $page) {
             $pageProducts = $this->getPageProducts($page);
             $products = array_merge($products, $pageProducts);
         }
@@ -31,10 +54,7 @@ class HotlineLinkParser extends AbstractLinkParser
     private function getPageProducts($url)
     {
         $query = '//td[@id="catalogue"]/ul[3]//div[@class="title-box"]//a';
-        $productNodes = $this->getXmlHelper()
-            ->setUrl($url)
-            ->getFinder()
-            ->query($query);
+        $productNodes = $this->getXmlHelper()->getNodeList($url, $query);
         $products = array();
         $length = $productNodes->length;
         for ($i = 0; $i < $length; $i++) {
@@ -79,16 +99,11 @@ class HotlineLinkParser extends AbstractLinkParser
     private function getLastPage()
     {
         $query = '//*[@id="catalogue"]/*[contains(concat(" ", normalize-space(@class), " "), " pager ")]/a[2]';
-        $pager = $this->getXmlHelper()
-            ->setUrl($this->getCategoryUrl())
-            ->getFinder()
-            ->query($query);
+        $pager = $this->getXmlHelper()->getNodeList($this->getCategoryUrl(), $query);
 
         $href = $pager->item(0)->getAttribute('href');
         $href = explode('=', $href);
         $pageNumber = (integer)end($href);
         return $pageNumber;
     }
-
-
 } 

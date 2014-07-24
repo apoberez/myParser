@@ -11,7 +11,7 @@ namespace AP\ParserBundle\Parsers\Link;
 
 use AP\ParserBundle\Parsers\XMLHelper\XMLHelper;
 
-abstract class AbstractLinkParser
+abstract class AbstractParser
 {
     /**
      * @var string
@@ -32,7 +32,7 @@ abstract class AbstractLinkParser
     /**
      * @return string
      */
-    public function getCategoryUrl()
+    protected function getCategoryUrl()
     {
         return $this->categoryUrl;
     }
@@ -49,7 +49,7 @@ abstract class AbstractLinkParser
     /**
      * @return \AP\ParserBundle\Parsers\XMLHelper\XMLHelper
      */
-    public function getXmlHelper()
+    protected function getXmlHelper()
     {
         return $this->xmlHelper;
     }
@@ -57,5 +57,10 @@ abstract class AbstractLinkParser
     /**
      * @return array
      */
-//    abstract public function getUrls();
+    abstract public function getProducts();
+
+    /**
+     * @return array
+     */
+    abstract public function getProductsList();
 } 

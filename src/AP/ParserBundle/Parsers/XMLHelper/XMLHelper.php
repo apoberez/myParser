@@ -46,7 +46,7 @@ class XMLHelper implements XMLHelperInterface
      * @param string $url
      * @return $this
      */
-    public function setUrl($url)
+    private function setUrl($url)
     {
         $this->url = $url;
 
@@ -74,8 +74,24 @@ class XMLHelper implements XMLHelperInterface
         return $document;
     }
 
+    /**
+     * @return \DOMXPath
+     */
     public function getFinder()
     {
-        return new \DOMXPath($this->getDomDocument());
+        $finder = new \DOMXPath($this->getDomDocument());
+        return $finder;
+    }
+
+    /**
+     * @param $url string
+     * @param $query string
+     * @return \DOMNodeList
+     */
+    public function getNodeList($url, $query)
+    {
+        $this->setUrl($url);
+        $nodeList = $this->getFinder()->query($query);
+        return $nodeList;
     }
 } 

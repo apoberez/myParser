@@ -8,7 +8,7 @@
 
 namespace AP\ParserBundle\Controller;
 
-use AP\ParserBundle\Parsers\Link\HotlineLinkParser;
+use AP\ParserBundle\Parsers\Link\HotlineParser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ParserController extends Controller
@@ -19,11 +19,12 @@ class ParserController extends Controller
 
     public function indexAction()
     {
-        $parser = new HotlineLinkParser('http://hotline.ua/computer/planshety/');
-        $k = $parser->getCategoryProducts();
-        var_dump($k);
+        $parser = new HotlineParser('http://hotline.ua/computer/planshety/');
+        $k = $parser->getProducts();
+        $product = $k[0];
+//        var_dump($product);
         return $this->render('@APParser/Parser/index.html.twig', array(
-//            'ss' =>$parser->getUrls()
+            'ss' => $product
         ));
     }
 }
