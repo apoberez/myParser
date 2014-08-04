@@ -1,7 +1,6 @@
-AP\ParserBundle\Entity\Url:
+AP\ParserBundle\Entity\Site:
     type: entity
     table: null
-    repositoryClass: AP\ParserBundle\Entity\UrlRepository
     id:
         id:
             type: integer
@@ -9,12 +8,15 @@ AP\ParserBundle\Entity\Url:
             generator:
                 strategy: AUTO
     fields:
-        title:
+        name:
             type: string
-            length: '30'
-        url:
+            length: '20'
+        baseUrl:
             type: string
-            length: '70'
-        active:
-            type: boolean
+            length: '20'
+            column: base_url
+    oneToMany:
+        categories:
+            targetEntity: Category
+            mappedBy: site
     lifecycleCallbacks: {  }

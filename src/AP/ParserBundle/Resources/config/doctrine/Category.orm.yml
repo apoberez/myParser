@@ -1,0 +1,30 @@
+AP\ParserBundle\Entity\Category:
+    type: entity
+    table: null
+    repositoryClass: AP\ParserBundle\Entity\CategoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '30'
+        baseUrl:
+            type: string
+            length: '60'
+            column: base_url
+        controlTime:
+            type: time
+            column: control_time
+    manyToOne:
+        site:
+            targetEntity: Site
+            inversedBy: categories
+    oneToMany:
+        products:
+            targetEntity: Product
+            mappedBy: category
+    lifecycleCallbacks: {  }
