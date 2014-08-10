@@ -1,0 +1,30 @@
+site:
+    pattern:  /
+    defaults: { _controller: "APParserBundle:Site:index" }
+
+site_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "APParserBundle:Site:show" }
+
+site_new:
+    pattern:  /new
+    defaults: { _controller: "APParserBundle:Site:new" }
+
+site_create:
+    pattern:  /create
+    defaults: { _controller: "APParserBundle:Site:create" }
+    requirements: { _method: post }
+
+site_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "APParserBundle:Site:edit" }
+
+site_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "APParserBundle:Site:update" }
+    requirements: { _method: post|put }
+
+site_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "APParserBundle:Site:delete" }
+    requirements: { _method: post|delete }

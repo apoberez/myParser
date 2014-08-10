@@ -1,4 +1,12 @@
 ap_parser:
     resource: "@APParserBundle/Resources/config/routing.yml"
     prefix:   /
-
+APParserBundle_site:
+    resource: "@APParserBundle/Resources/config/routing/site.yml"
+    prefix:   /site
+APParserBundle_category:
+    resource: "@APParserBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+APParserBundle_product:
+    resource: "@APParserBundle/Resources/config/routing/product.yml"
+    prefix:   /product

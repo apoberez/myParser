@@ -1,0 +1,35 @@
+product:
+    pattern:  /
+    defaults: { _controller: "APParserBundle:Product:index" }
+
+product_parse:
+    pattern: /parse
+    defaults: { _controller: "APParserBundle:Product:parse" }
+    requirements: { _method: post }
+
+product_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "APParserBundle:Product:show" }
+
+product_new:
+    pattern:  /new
+    defaults: { _controller: "APParserBundle:Product:new" }
+
+product_create:
+    pattern:  /create
+    defaults: { _controller: "APParserBundle:Product:create" }
+    requirements: { _method: post }
+
+product_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "APParserBundle:Product:edit" }
+
+product_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "APParserBundle:Product:update" }
+    requirements: { _method: post|put }
+
+product_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "APParserBundle:Product:delete" }
+    requirements: { _method: post|delete }

@@ -18,7 +18,7 @@ AP\ParserBundle\Entity\Product:
         properties:
             type: json_array
         createDate:
-            type: time
+            type: integer
             column: crecreate_date
         updateDate:
             type: time

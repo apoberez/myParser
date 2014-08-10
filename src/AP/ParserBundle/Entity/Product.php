@@ -30,7 +30,7 @@ class Product
     private $properties;
 
     /**
-     * @var \DateTime
+     * @var integer
      */
     private $createDate;
 
@@ -125,7 +125,7 @@ class Product
     /**
      * Get createDate
      *
-     * @return \DateTime
+     * @return integer
      */
     public function getCreateDate()
     {
@@ -135,7 +135,7 @@ class Product
     /**
      * Set createDate
      *
-     * @param \DateTime $createDate
+     * @param integer $createDate
      * @return Product
      */
     public function setCreateDate($createDate)

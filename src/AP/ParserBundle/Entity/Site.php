@@ -125,4 +125,12 @@ class Site
     {
         return $this->categories;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
